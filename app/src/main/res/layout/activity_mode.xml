@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/green_radial">
+
+    <ImageButton
+        android:id="@+id/more"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@drawable/moreinfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/arenaImage"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:contentDescription="@string/image_description"
+        />
+
+    <ImageButton
+        android:id="@+id/cancel"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@drawable/cancel"
+        app:layout_constraintBottom_toTopOf="@+id/arenaImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:contentDescription="@string/image_description"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/play"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/green"
+        android:fontFamily="@font/chango"
+        android:gravity="center"
+        android:shadowColor="@color/black"
+        android:shadowDy="8"
+        android:shadowRadius="2"
+        android:text="Play"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arenaImage" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintBottom_toTopOf="@+id/botPlayMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/localPlay"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_weight="1"
+            android:background="@drawable/green"
+            android:fontFamily="@font/chango"
+            android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDy="8"
+            android:shadowRadius="2"
+            android:text="Local Play"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            tools:layout_editor_absoluteY="596dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addPlayerName"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit"
+            android:contentDescription="@string/image_description"
+            android:gravity="center"
+
+            />
+    </LinearLayout>
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/botPlay"-->
+    <!--        android:layout_width="@dimen/_230sdp"-->
+    <!--        android:layout_height="@dimen/_50sdp"-->
+    <!--        android:background="@drawable/green"-->
+    <!--        android:fontFamily="@font/chango"-->
+    <!--        android:gravity="center"-->
+    <!--        android:shadowColor="@color/black"-->
+    <!--        android:shadowDy="8"-->
+    <!--        android:shadowRadius="2"-->
+    <!--        android:text="Play With Bot"-->
+    <!--        android:textAllCaps="false"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="@dimen/_20sdp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />-->
+    <LinearLayout
+        android:id="@+id/botPlayMain"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botPlay"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_weight="1"
+            android:background="@drawable/green"
+            android:fontFamily="@font/chango"
+            android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDy="8"
+            android:shadowRadius="2"
+            android:text="Bot Play"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            tools:layout_editor_absoluteY="596dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/whoFirstPlay"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/image_description"
+            android:gravity="center"
+            android:background="@drawable/random_turn"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/arenaImage"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_200sdp"
+        app:layout_constraintBottom_toTopOf="@+id/play"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/more"
+        android:contentDescription="@string/image_description"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

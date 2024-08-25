@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TicTacToeClashOfXO"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31"
+        >
+        <!-- It is the app id , where ww will add the admob -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+        <activity
+            android:name=".gameLogic.EatTicTacToe"
+            android:exported="false" />
+        <activity
+            android:name=".newCode.GameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".newCode.BattleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".newCode.ShopActivity"
+            android:exported="false" />
+        <activity
+            android:name=".gameLogic.Connect4TicTacToe"
+            android:exported="false" />
+        <activity
+            android:name=".gameLogic.InfiniteTicTacToe"
+            android:exported="false" >
+        </activity>
+        <activity
+            android:name=".gameLogic.SuperTicTacToe"
+            android:exported="false" />
+        <activity
+            android:name=".WinnerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".gameLogic.UltimateTicTacToe"
+            android:exported="false" />
+        <activity
+            android:name=".gameLogic.Connect5TicTacToe"
+            android:exported="false" />
+        <activity
+            android:name=".gameLogic.SimpleTicTacToe"
+            android:exported="false" />
+        <activity
+            android:name=".StartActivity"
+            android:exported="true"
+            android:noHistory="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

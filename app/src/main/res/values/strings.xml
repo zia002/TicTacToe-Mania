@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">TicTacToe Clash of XO</string>
+    <dimen name="padding_size1">4dp</dimen>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_description">Image Description</string>
+    <string name="battle">Battle</string>
+    <string name="on">Sound On</string>
+    <string name="off">Sound Off</string>
+    <string name="set">Set</string>
+    <string name="profile">Profile</string>
+    <string name="circle">Circle</string>
+    <string name="cross">Cross</string>
+    <string name="inventory">Inventory</string>
+    <string name="cart">Cart</string>
+    <string name="tf">%1$s Turn First</string>
+    <string name="bot">Bot</string>
+    <string name="me">Trainer</string>
+    <string name="later">Later</string>
+    <string name="accept">Accept</string>
+
+    <!--  Ad related  -->
+    <string name="ad">Watch an Ad to Claim Reward Coin 500\-1000 </string>
+    <string name="adTxt">Awesome! Your next reward will be ready to claim at %1$s.Don’t miss it!</string>
+    <string name="ad_id_interstitial">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_id_reward">ca-app-pub-3940256099942544/5224354917</string>
+
+     <!-- Simple TicTacToe   -->
+    <string name="sTTT">Simple TicTacToe</string>
+    <string name="sTTT1">A classic tic-tac-toe game where players take turns placing their marks on a 3x3 grid. The goal is to get 3 marks in a row—vertically, horizontally, or diagonally—to win.</string>
+    <string name="sTTT2">The game includes a timer for each player, if a player does not place their mark within the allotted time , the turn automatically passes to the next player.If the board fills up with no winner, as usual the game ends in a tie but to add a twist, the game tracks each player\'s time, and if no one gets 3 in a row, the player with the least time taken wins.</string>
+
+    <!-- 5 in a row TicTacToe   -->
+    <string name="iaRow">5 In a Row TicTacToe</string>
+    <string name="iaRow1">A strategy game where players take turns placing their marks on a 9x9 grid. The goal is to align 5 marks in a row—vertically, horizontally, or diagonally—to win.</string>
+    <string name="iaRow2">The game includes a timer for each player, if a player does not place their mark within the allotted time , the turn automatically passes to the next player.If the grid fills up with no winner, the game ends in a tie. To add a twist, the game tracks each player\'s time, and if no one achieves 5 in a row, the player with the least time taken wins</string>
+
+    <!-- connect-4    -->
+    <string name="c4">Connect-4 TicTacToe</string>
+    <string name="c41">A strategy game where players take turns dropping their marks into a 6x7 grid. The goal is to connect 4 marks in a row—vertically, horizontally, or diagonally—to win.The player clicks on the top of a column to place their mark, which drops to the last vacant spot</string>
+    <string name="c42">The game includes a timer for each player; if a player does not place their mark within the allotted time, the turn automatically passes to the next player.If the grid fills up with no winner, the game ends in a tie. To add a twist, the game tracks each player\'s time, and if no one connects 4 in a row, the player with the least time taken wins.</string>
+
+    <string name="sT">Super TicTacToe</string>
+    <string name="sT1">A strategic evolution of the classic game, played on a 9x9 grid that\'s divided into nine 3x3 local boards. The goal is to win three local boards in a row—vertically, horizontally, or diagonally—on the global 3x3 board to claim victory.</string>
+    <string name="sT2">Players take turns placing their marks in one of the 81 squares on the grid. Winning an individual 3x3 local board is like winning a square on the global board. The real challenge comes in aligning your wins on the global 3x3 board to secure the overall game.</string>
+    <string name="sT3">The game includes a timer for each player; if a player does not place their mark within the allotted time, the turn automatically passes to the next player.The game also tracks each player\'s time, adding an extra layer of intensity. If no player wins three local boards in a row and the entire grid fills up, the player with the least time taken wins.</string>
+    
+    <string name="uT">Ultimate TicTacToe</string>
+    <string name="uT1">A complex and strategic version of tic-tac-toe, played on a 9x9 grid divided into nine 3x3 local boards. These local boards form a global 3x3 board. The goal is to win three local boards in a row—vertically, horizontally, or diagonally—on the global board to claim victory.</string>
+    <string name="uT2">When a player places a mark on any position (1/-9) within a local board, the next player must place their mark on the corresponding local board that matches the position number. For example, if you play in the 3rd position of a local board, your opponent must play on the 3rd local board. If a move directs a player to a local board that has already been won or tied, the player can choose to play on any other available local board that has not been won or tied.</string>
+    <string name="uT3">Additionally, the background of the playable local boards updates to highlight which boards are available for the next move.The game includes a timer for each player; if a player does not place their mark within the allotted time, the turn automatically passes to the next player.If no one wins three local boards in a row and the global board fills up, the player with the least time taken wins.</string>
+    
+    <string name="iT">Infinite TicTacToe</string>
+    <string name="iT1">A dynamic and continuous version of tic-tac-toe played on a 3x3 grid. Each player can have up to 3 marks on the board at a time. When a player places their fourth mark, the first mark they placed will be removed.The game continues until a player successfully aligns 3 of their marks in a row—vertically, horizontally, or diagonally—to win.</string>
+    <string name="iT2">The game includes a timer for each player; if a player does not place their mark within the allotted time, the turn automatically passes to the next player. The game also tracks each player\'s time, adding a competitive edge to every move.</string>
+    
+    <string name="eT">Eat TicTacToe</string>
+    <string name="eT1">A unique variation of tic-tac-toe played on a 3x3 grid where players use three different sizes of marks—Largest, Larger, and Small. Players choose a mark and place it on the board, with the rule that a Largest mark can be placed over both Larger and Small marks, and a Larger mark can be placed over Small marks. </string>
+    <string name="eT2">The objective is to align 3 of the same  mark in a row—vertically, horizontally, or diagonally—to win.The game also includes a timer for each player; if a player doesn’t place their mark within the allotted time, the turn automatically passes to the next player. The game tracks each player\'s time, If the board fills up with no winner, the player with the least time taken wins.</string>
+</resources>
