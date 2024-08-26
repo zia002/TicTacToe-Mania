@@ -316,6 +316,7 @@ fun playGame(humanFirst: Boolean, boardSize: Int, board: Array<IntArray>) {
 
 fun main() {
     // commenting
+    // testing the test branch on github
     val humanFirst = true
     val size = 9
     val board = Array(size) { IntArray(size) }
