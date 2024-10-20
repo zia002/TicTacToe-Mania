@@ -331,13 +331,6 @@ class SimpleTicTacToe : AppCompatActivity() {
                             play(turn + 1)
                         }
                     }
-                    delay(5010)
-                    if (player1InTime == 0) {
-                        job1?.cancel()
-                        putValueJob!!.cancel()
-                        changeTurn(2)
-                        play(turn + 1)
-                    }
                 }
             }
             else{
@@ -388,13 +381,6 @@ class SimpleTicTacToe : AppCompatActivity() {
                         changeTurn(1)
                         play(turn +1)
                     }
-                }
-                delay(5010)
-                if(player2InTime==0){
-                    job1?.cancel()
-                    putValueJob!!.cancel()
-                    changeTurn(1)
-                    play(turn+1)
                 }
             }
         }
@@ -533,6 +519,7 @@ class SimpleTicTacToe : AppCompatActivity() {
     }
     }
     private fun bot(b: Array<CharArray>):Pair<Int,Int> {
+        val bestMove = mutableMapOf<Int, MutableList<Pair<Int, Int>>>()
         var score: Int
         var best = Int.MIN_VALUE
         var row = 0
@@ -543,16 +530,32 @@ class SimpleTicTacToe : AppCompatActivity() {
                     b[i][j] = '1'
                     score = minimax(b,false,Int.MIN_VALUE,Int.MAX_VALUE)
                     b[i][j] = '-'
-                    if (score > best) {
+                    if (score >= best) {
                         row = i
                         col = j
                         best = score
+                        //----- map the best score here -----//
+                        if(bestMove.containsKey(best)) bestMove[best]?.add(Pair(row,col))
+                        else bestMove[best]= mutableListOf(Pair(row,col))
                     }
                 }
             }
         }
-        board[row][col] = '1'
+        val bestPair=getRandomPairFromBestMove(bestMove,best)
+        if(bestPair!=null){
+            row=bestPair.first
+            col=bestPair.second
+        }
+        board[row][col]='1'
         return Pair(row, col)
+    }
+    //----- to get the random max scored value from the bestScore mapping value -----//
+    private fun getRandomPairFromBestMove(bestMove: MutableMap<Int, MutableList<Pair<Int, Int>>>, key: Int): Pair<Int, Int>? {
+        val pairs = bestMove[key]
+        return pairs?.let {
+            if (it.isNotEmpty()) it[Random.nextInt(it.size)]
+            else null
+        }
     }
     private fun randomPlay():Pair<Int,Int>{
         val list = mutableListOf<Pair<Int, Int>>()

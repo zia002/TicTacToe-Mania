@@ -17,7 +17,11 @@ import com.example.tictactoeclashofxo.databinding.ActivityConnect5TictactoeBindi
 import com.example.tictactoeclashofxo.WinnerActivity
 import com.example.tictactoeclashofxo.database.SessionManager
 import com.example.tictactoeclashofxo.database.Task
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -83,7 +87,7 @@ class Connect5TicTacToe : AppCompatActivity() {
         winSound=MediaPlayer.create(this,R.raw.win_game)
         loseSound=MediaPlayer.create(this,R.raw.lose_game)
         soundOn=myPref.getDetails("SOUND").toString()
-        val list= listOf(9,11,13,15,5,4,10,8)
+        val list= listOf(9,11,13,15,4,10,8)
         rand=list.random()
         //----------- here we show the initial dialog about the match,who's turn first and who will have circle or cross ------------//
         val dialog= Dialog(this)
@@ -326,13 +330,13 @@ class Connect5TicTacToe : AppCompatActivity() {
                             play(turn + 1)
                         }
                     }
-                    delay(15010)
-                    if (player1InTime == 0) {
-                        job1?.cancel()
-                        putValueJob!!.cancel()
-                        changeTurn(2)
-                        play(turn + 1)
-                    }
+//                    delay(15010)
+//                    if (player1InTime == 0) {
+//                        job1?.cancel()
+//                        putValueJob!!.cancel()
+//                        changeTurn(2)
+//                        play(turn + 1)
+//                    }
                 }
             }
             else{
@@ -349,18 +353,45 @@ class Connect5TicTacToe : AppCompatActivity() {
                         changeTurn(2)
                         play(turn + 1)
                     }
-                    changeTurn(2)
-                    play(turn + 1)
                 }else{
                     //------------ bot mode control here ---------------//
                     val time=Task.getRandomTime()
+                    var mustStop=false
+                    var id=0
+                    // Storing the Job reference for later cancellation
+                    val test = CoroutineScope(Dispatchers.Default).launch {
+                        val bestMove = async {
+                            for (i in 0..8) {
+                                for (j in 0..8) {
+                                    mustStop = isItWinUser(i, j)
+                                    if (mustStop) {
+                                        id=i*9 + j
+                                        break
+                                    }
+                                }
+                                if (mustStop) {
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    test.cancel()
                     job1=lifecycleScope.launch {
-                        val id=bot()
-                        delay(time)
-                        buttonList[id].setImageResource(player1Item)
-                        if (soundOn=="1") putSound?.start()
-                        changeTurn(2)
-                        play(turn + 1)
+                        if(mustStop) {
+                            delay(time)
+                            if (soundOn == "1") putSound?.start()
+                            buttonList[id].setImageResource(player1Item)
+                            changeTurn(2)
+                            play(turn + 1)
+                        }
+                        else {
+                            val id2 = bot()
+                            delay(time)
+                            if (soundOn == "1") putSound?.start()
+                            buttonList[id2].setImageResource(player1Item)
+                            changeTurn(2)
+                            play(turn + 1)
+                        }
                     }
                 }
             }
@@ -388,13 +419,13 @@ class Connect5TicTacToe : AppCompatActivity() {
                         play(turn +1)
                     }
                 }
-                delay(15010)
-                if(player2InTime==0){
-                    job1?.cancel()
-                    putValueJob!!.cancel()
-                    changeTurn(1)
-                    play(turn+1)
-                }
+//                delay(15010)
+//                if(player2InTime==0){
+//                    job1?.cancel()
+//                    putValueJob!!.cancel()
+//                    changeTurn(1)
+//                    play(turn+1)
+//                }
             }
         }
     }
@@ -403,7 +434,6 @@ class Connect5TicTacToe : AppCompatActivity() {
             buttonList[element].setBackgroundResource(R.drawable.win_bg)
         }
     }
-
     //==== here player-1 and bot put <2> and player-2 and user put <1> =====//
     private fun put(turn: Int, callback: () -> Unit) {
         for ((index, imageView) in buttonList.withIndex()) {
@@ -584,23 +614,19 @@ class Connect5TicTacToe : AppCompatActivity() {
                 }
             }
         }
-
         val finalValueX = mutableListOf<Int>()
         val finalValueY = mutableListOf<Int>()
         for (key in potentialValues.keys) {
             finalValueX.add(key.first)
             finalValueY.add(key.second)
         }
-
         return Pair(finalValueX, finalValueY)
     }
-
     private fun convertArrToMove(row: Int, col: Int): String {
         val colVal = ('a' + col)
         val rowVal = (row + 1).toString()
         return "$colVal$rowVal"
     }
-
     private fun getRandomMove(board: Array<IntArray>): Pair<Int, Int> {
         var ctr = 0
         val idx = 9 / 2
@@ -628,9 +654,8 @@ class Connect5TicTacToe : AppCompatActivity() {
                 }
             }
         }
-        return -1 to -1 // should not reach here
+        return -1 to -1
     }
-
     private fun btsConvert(board: Array<IntArray>, player: Int): List<String> {
         val cList = mutableListOf<String>()
         val rList = mutableListOf<String>()
@@ -698,7 +723,6 @@ class Connect5TicTacToe : AppCompatActivity() {
         }
         return dList + cList + rList
     }
-
     private fun points(board: Array<IntArray>, player: Int): Int {
         var value = 0
         val playerStrArr = btsConvert(board, player)
@@ -726,11 +750,9 @@ class Connect5TicTacToe : AppCompatActivity() {
         }
         return value
     }
-
     private fun otherPlayerStone(player: Int): Int {
         return if (player == 1) 2 else 1
     }
-
     private fun minimax(board: Array<IntArray>, isMaximizer: Boolean, depth: Int, alphaVar: Int, betaVar: Int, player: Int): Int {
         val point = points(board, player)
         if (depth == 3 || point >= 20000000 || point <= -20000000) {
@@ -794,5 +816,62 @@ class Connect5TicTacToe : AppCompatActivity() {
         updatedBoard[bestMoveRow][bestMoveCol] = mark
         return convertArrToMove(bestMoveRow, bestMoveCol) to updatedBoard
     }
-    //================================================================//
+    //================================================================/
+    private fun  isItWinUser(row: Int, col: Int): Boolean {
+        val grid=board
+        var count = 1
+        var i = col - 1
+        while (i >= 0 && grid[row][i] == 1) {
+            count++
+            if (count == 5) return true
+            i--
+        }
+        i = col + 1
+        while (i < 9 && grid[row][i] == 1) {
+            count++
+            if (count == 5) return true
+            i++
+        }
+        count = 1
+        i = row - 1
+        while (i >= 0 && grid[i][col] == 1) {
+            count++
+            if (count == 5) return true
+            i--
+        }
+        i = row + 1
+        while (i < 9 && grid[i][col] == 1) {
+            count++
+            if (count == 5) return true
+            i++
+        }
+        count = 1
+        i = 1
+        while (row - i >= 0 && col - i >= 0 && grid[row - i][col - i] == 1) {
+            count++
+            if (count == 5) return true
+            i++
+        }
+        i = 1
+        while (row + i < 9 && col + i < 9 && grid[row + i][col + i] == 1) {
+            count++
+            if (count == 5) return true
+            i++
+        }
+        count = 1
+        i = 1
+        while (row - i >= 0 && col + i < 9 && grid[row - i][col + i] == 1) {
+            count++
+            if (count == 5) return true
+            i++
+        }
+        i = 1
+        while (row + i < 9 && col - i >= 0 && grid[row + i][col - i] == 1) {
+            count++
+            if (count == 5) return true
+            i++
+        }
+        return false
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.tictactoeclashofxo.newCode
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -117,7 +118,7 @@ class ShopActivity : AppCompatActivity() {
         var cartDataList=db.getAllData(1)
         binding.dataList.apply {
             adapter=MyAdapter(1,context,inventoryDataList,myCoin)
-            layoutManager= StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            layoutManager=GridLayoutManager(applicationContext,2)
         }
         binding.cart.setOnClickListener {
             binding.cart.setBackgroundResource(R.drawable.blue)
@@ -137,7 +138,7 @@ class ShopActivity : AppCompatActivity() {
             inventoryDataList.shuffle()
             binding.dataList.apply {
                 adapter=MyAdapter(1,context,inventoryDataList,myCoin)
-                layoutManager=StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+                layoutManager=GridLayoutManager(applicationContext,2)
             }
         }
         binding.backToBattle.setOnClickListener {

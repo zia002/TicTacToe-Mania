@@ -332,14 +332,14 @@ class InfiniteTicTacToe : AppCompatActivity() {
                             play(turn + 1)
                         }
                     }
-                    delay(5010)
-                    if (player1InTime == 0) {
-                        job1?.cancel()
-                        putValueJob!!.cancel()
-                        changeTurn(2)
-                        removeTurn(1)
-                        play(turn + 1)
-                    }
+//                    delay(5010)
+//                    if (player1InTime == 0) {
+//                        job1?.cancel()
+//                        putValueJob!!.cancel()
+//                        changeTurn(2)
+//                        removeTurn(1)
+//                        play(turn + 1)
+//                    }
                 }
             }
             else{
@@ -452,14 +452,14 @@ class InfiniteTicTacToe : AppCompatActivity() {
                         play(turn +1)
                     }
                 }
-                delay(5010)
-                if(player2InTime==0){
-                    job1?.cancel()
-                    putValueJob!!.cancel()
-                    changeTurn(1)
-                    removeTurn(2)
-                    play(turn+1)
-                }
+//                delay(5010)
+//                if(player2InTime==0){
+//                    job1?.cancel()
+//                    putValueJob!!.cancel()
+//                    changeTurn(1)
+//                    removeTurn(2)
+//                    play(turn+1)
+//                }
             }
         }
     }

@@ -20,6 +20,8 @@ import com.example.tictactoeclashofxo.WinnerActivity
 import com.example.tictactoeclashofxo.database.SessionManager
 import com.example.tictactoeclashofxo.database.Task
 import com.example.tictactoeclashofxo.databinding.ActivityConnect4TicTacToeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,7 +48,6 @@ class Connect4TicTacToe : AppCompatActivity() {
     private var whoseTurn:Int=0
     private var background:Int=0
     private var turn=0
-
     private var putSound: MediaPlayer? =null
     private var winSound:MediaPlayer?=null
     private var loseSound:MediaPlayer?=null
@@ -225,6 +226,7 @@ class Connect4TicTacToe : AppCompatActivity() {
             val loser: String
             val winnerTime: String
             val loserTime: String
+
             if(result.first==1){
                 winner=player1Name.toString()
                 loser=player2Name.toString()
@@ -282,7 +284,6 @@ class Connect4TicTacToe : AppCompatActivity() {
             intent.putExtra("LoserName",loser)
             intent.putExtra("WinTime",winnerTime)
             intent.putExtra("LoseTime",loserTime)
-            intent.putExtra("Type",type)
             intent.putExtra("WinCoin",winCoin)
             intent.putExtra("LoseCoin",loseCoin)
 
@@ -323,14 +324,14 @@ class Connect4TicTacToe : AppCompatActivity() {
                             play(turn + 1)
                         }
                     }
-                    delay(5010)
-                    if (player1InTime == 0) {
-                        job1?.cancel()
-                        putValueJob!!.cancel()
-                        changeTurn(2)
-                        cancelItemClick(0)
-                        play(turn + 1)
-                    }
+//                    delay(5010)
+//                    if (player1InTime == 0) {
+//                        job1?.cancel()
+//                        putValueJob!!.cancel()
+//                        changeTurn(2)
+//                        cancelItemClick(0)
+//                        play(turn + 1)
+//                    }
                 }
             }
             else{
@@ -350,11 +351,20 @@ class Connect4TicTacToe : AppCompatActivity() {
                     }
                 }else{
                     //------------ bot mode control here ---------------//
-                    val delayTime=Task.getRandomTime()
-                    val b=board
-                    job1=lifecycleScope.launch {
-                        val res=bot(b,5)
-                        delay(delayTime)
+//                    val delayTime=Task.getRandomTime()
+//                    val b=board
+//                    job1=lifecycleScope.launch {
+//                        val res=bot(b,5)
+//                        delay(delayTime)
+//                        board[res.first][res.second]='1'
+//                        buttonList[(res.first*7)+res.second].setImageResource(player1Item)
+//                        if(soundOn=="1") putSound?.start()
+//                        changeTurn(2)
+//                        play(turn + 1)
+//                    }
+                    CoroutineScope(Dispatchers.Default).launch {
+                        val b=board
+                        val res=bot(b,8)
                         board[res.first][res.second]='1'
                         buttonList[(res.first*7)+res.second].setImageResource(player1Item)
                         if(soundOn=="1") putSound?.start()
@@ -386,13 +396,13 @@ class Connect4TicTacToe : AppCompatActivity() {
                         play(turn +1)
                     }
                 }
-                delay(5010)
-                if(player2InTime==0){
-                    job1?.cancel()
-                    putValueJob!!.cancel()
-                    changeTurn(1)
-                    play(turn+1)
-                }
+//                delay(5010)
+//                if(player2InTime==0){
+//                    job1?.cancel()
+//                    putValueJob!!.cancel()
+//                    changeTurn(1)
+//                    play(turn+1)
+//                }
             }
         }
     }
@@ -442,9 +452,10 @@ class Connect4TicTacToe : AppCompatActivity() {
     private fun trainer():Pair<Int,Int>{
         val randDepth= listOf(5,5,4,1,5,1,1,5,4,5,4,5,4,1,5,1,5,5,1,5,5,4,5,5,5,4)
         val depth=randDepth.random()
-        return bot(board,depth)
+        // return bot(board,depth)
+        return Pair(1,2)
     }
-    private fun bot(b: Array<CharArray>,depth: Int): Pair<Int, Int> {
+    private suspend fun bot(b: Array<CharArray>,depth: Int): Pair<Int, Int> {
         val res=putCheck()
         if(res.first!=-1){
             return Pair(res.second,res.third)
@@ -544,6 +555,7 @@ class Connect4TicTacToe : AppCompatActivity() {
     }
     //====== here we implement the minimax and bot play e mode here ========//
     private fun miniMaxAlphaBeta(board: Array<CharArray>, depth: Int, player: Char): Int {
+        println(Thread.currentThread())
         val validMoves = getValidMoves(board).toMutableList()
         validMoves.shuffle()
         var bestMove = validMoves[0]

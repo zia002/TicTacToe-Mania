@@ -183,15 +183,18 @@ class BattleActivity : AppCompatActivity() {
             val sound = dialog.findViewById<AppCompatButton>(R.id.sound)
             val privacyPolicy = dialog.findViewById<AppCompatButton>(R.id.privacyPolicy)
             val rateUs = dialog.findViewById<AppCompatButton>(R.id.rateUs)
-            val rewardRule=dialog.findViewById<AppCompatButton>(R.id.rewardRule)
             val changeName = dialog.findViewById<AppCompatButton>(R.id.changeName)
+            val easy=dialog.findViewById<AppCompatButton>(R.id.easy)
+            val hard=dialog.findViewById<AppCompatButton>(R.id.hard)
+            val insane=dialog.findViewById<AppCompatButton>(R.id.insane)
             Task.showDialogPerfect(dialog)
             cancelSetting.setOnClickListener { dialog.dismiss() }
             //------- here we control the sound system -------//
             if (myPref.getDetails("SOUND") == "1") {
                 sound.text=getString(R.string.on)
                 sound.setBackgroundResource(R.drawable.green)
-            } else {
+            }
+            else {
                 sound.setBackgroundResource(R.drawable.red)
                 sound.text =getString(R.string.off)
             }
@@ -205,6 +208,43 @@ class BattleActivity : AppCompatActivity() {
                     sound.text = getString(R.string.on)
                     myPref.soundSystem("1")
                 }
+            }
+            //------- here control the difficulty level of the game ------//
+            val curLevel=myPref.getLevel()
+            when(curLevel){
+                1->{
+                    easy.setBackgroundResource(R.drawable.green)
+                    hard.setBackgroundResource(R.drawable.gray)
+                    insane.setBackgroundResource(R.drawable.gray)
+                }
+                2->{
+                    easy.setBackgroundResource(R.drawable.gray)
+                    hard.setBackgroundResource(R.drawable.yellow)
+                    insane.setBackgroundResource(R.drawable.gray)
+                }
+                3->{
+                    easy.setBackgroundResource(R.drawable.gray)
+                    hard.setBackgroundResource(R.drawable.gray)
+                    insane.setBackgroundResource(R.drawable.red)
+                }
+            }
+            easy.setOnClickListener {
+                myPref.setLevel(1)
+                easy.setBackgroundResource(R.drawable.green)
+                hard.setBackgroundResource(R.drawable.gray)
+                insane.setBackgroundResource(R.drawable.gray)
+            }
+            hard.setOnClickListener {
+                myPref.setLevel(2)
+                easy.setBackgroundResource(R.drawable.gray)
+                hard.setBackgroundResource(R.drawable.yellow)
+                insane.setBackgroundResource(R.drawable.gray)
+            }
+            insane.setOnClickListener {
+                myPref.setLevel(3)
+                easy.setBackgroundResource(R.drawable.gray)
+                hard.setBackgroundResource(R.drawable.gray)
+                insane.setBackgroundResource(R.drawable.red)
             }
             //------- here we control the change name task -----//
             changeName.setOnClickListener {

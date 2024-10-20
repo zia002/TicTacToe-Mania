@@ -362,13 +362,13 @@ class EatTicTacToe : AppCompatActivity() {
                             play(turn + 1)
                         }
                     }
-                    delay(20010)
-                    if (player1InTime == 0) {
-                        job1?.cancel()
-                        putValueJob!!.cancel()
-                        changeTurn(2)
-                        play(turn + 1)
-                    }
+//                    delay(20010)
+//                    if (player1InTime == 0) {
+//                        job1?.cancel()
+//                        putValueJob!!.cancel()
+//                        changeTurn(2)
+//                        play(turn + 1)
+//                    }
                 }
             }
             else{
@@ -441,6 +441,7 @@ class EatTicTacToe : AppCompatActivity() {
                     }
                 }
                 else{
+                    player1Timer.start()
                     //------------ bot mode control here ---------------//
                     val b=board
                     job1=lifecycleScope.launch{
@@ -468,7 +469,6 @@ class EatTicTacToe : AppCompatActivity() {
                         botItemBg(res.first)
                         delay(timeDelay)
                         putBotItem(res.first,res.second)
-                        Log.d("runTime",count.toString())
                         count=0
                         changeTurn(2)
                         play(turn + 1)
@@ -500,17 +500,16 @@ class EatTicTacToe : AppCompatActivity() {
                         play(turn +1)
                     }
                 }
-                delay(20010)
-                if(player2InTime==0){
-                    job1?.cancel()
-                    putValueJob!!.cancel()
-                    changeTurn(1)
-                    play(turn+1)
-                }
+//                delay(20010)
+//                if(player2InTime==0){
+//                    job1?.cancel()
+//                    putValueJob!!.cancel()
+//                    changeTurn(1)
+//                    play(turn+1)
+//                }
             }
         }
     }
-
     private fun putBotItem(item: Int, index: Int) {
         when(item){
             1->{
@@ -840,11 +839,11 @@ class EatTicTacToe : AppCompatActivity() {
     //======== here we implementing the minimax algorithm for the eat tic tac toe game ==========//
     private suspend fun bot(board: Array<Int>,a3: Int, a2: Int, a1: Int,b3:Int,b2:Int,b1:Int):Pair<Int,Int>{
         var item=0;var index=0
-        //CoroutineScope(Dispatchers.Default).launch {
+        CoroutineScope(Dispatchers.Default).launch {
             val move = findBestMove(board, a3, a2, a1, b3, b2, b1)
             index = move.first!!
             item = move.second
-        //}
+        }
         return Pair(item,index)
     }
     private fun checkWinner(board: Array<Int>): Int{
@@ -877,7 +876,7 @@ class EatTicTacToe : AppCompatActivity() {
         var bestScore = Int.MIN_VALUE
         var bestMove: Int? = null
         var bestItem = 0
-        withTimeoutOrNull(3000) {
+        //withTimeoutOrNull(3000) {
             for (i in board.indices) {
                 val top = board[i]
                 if (x3 > 0 && abs(top) < 3) {
@@ -947,7 +946,7 @@ class EatTicTacToe : AppCompatActivity() {
                     }
                 }
             }
-        }
+        //}
         return Pair(bestMove, bestItem)
     }
     private fun minimax(board: Array<Int>, depth: Int, alphaVal: Int, betaVal: Int, maximizingPlayer: Boolean, x3: Int, x2: Int, x1: Int, o3: Int, o2: Int, o1: Int): Int {

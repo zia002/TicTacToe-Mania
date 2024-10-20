@@ -60,6 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Winner_name">
 
         <RelativeLayout
+            android:id="@+id/winCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -190,6 +191,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Loser_name">
 
         <RelativeLayout
+            android:id="@+id/loseCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -231,7 +233,9 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/_5sdp"
                 android:contentDescription="@string/image_description"
-                android:src="@drawable/win_time" />
+                android:src="@drawable/win_time"
+                android:layout_centerInParent="true"
+                />
 
             <TextView
                 android:id="@+id/loserTime"
@@ -246,7 +250,8 @@
                 android:shadowRadius="8"
                 android:textColor="#CC1F1F"
                 android:textSize="@dimen/_15sdp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

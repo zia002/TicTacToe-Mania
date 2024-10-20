@@ -19,7 +19,7 @@
     <string name="accept">Accept</string>
 
     <!--  Ad related  -->
-    <string name="ad">Watch an Ad to Claim Reward Coin 500\-1000 </string>
+    <string name="ad">Watch an Ad to Claim Reward 500 to 1000 Coins! </string>
     <string name="adTxt">Awesome! Your next reward will be ready to claim at %1$s.Don’t miss it!</string>
     <string name="ad_id_interstitial">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ad_id_reward">ca-app-pub-3940256099942544/5224354917</string>
